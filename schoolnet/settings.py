@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'widget_tweaks',
+    'fontawesome_free',
 ]
 
 MIDDLEWARE = [

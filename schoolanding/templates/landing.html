@@ -6,7 +6,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Material Design Bootstrap</title>
+  <title>SchoolNet</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href={% static 'schoolanding/css/all.css' %}>
   <!-- Bootstrap core CSS -->
@@ -75,12 +75,12 @@
           <!--Links-->
           <ul class="navbar-nav mr-auto smooth-scroll">
             <li class="nav-item">
-              <a class="nav-link waves-effect waves-light" href="https://mdbootstrap.com/previews/templates/landing-page/html/Landing-Page-University.html#home">Home
+              <a class="nav-link waves-effect waves-light" href="#home">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect waves-light" href="https://mdbootstrap.com/previews/templates/landing-page/html/Landing-Page-University.html#info" data-offset="100">Info</a>
+              <a class="nav-link waves-effect waves-light" href="#contact" data-offset="100">Info</a>
             </li>
             <li class="nav-item">
               <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#modal-contact">Contact</a>
@@ -121,8 +121,8 @@
                 <hr class="hr-light">
                 <h3 class="subtext-header mt-4 mb-5">Reshaping Education through Technology</h3>
               </div>
-              <a href="https://mdbootstrap.com/previews/templates/landing-page/html/Landing-Page-University.html#events" data-offset="100" class="btn btn-info wow fadeInLeft waves-effect waves-light" data-wow-delay="0.2s" style="visibility: visible; animation-name: fadeInLeft; animation-delay: 0.2s;">Products</a>
-              <a href="https://mdbootstrap.com/previews/templates/landing-page/html/Landing-Page-University.html#courses" data-offset="100" class="btn btn-warning wow fadeInRight waves-effect waves-light" data-wow-delay="0.2s" style="visibility: visible; animation-name: fadeInRight; animation-delay: 0.2s;">Services</a>
+              <a href="#" data-offset="100" class="btn btn-info wow fadeInLeft waves-effect waves-light" data-wow-delay="0.2s" style="visibility: visible; animation-name: fadeInLeft; animation-delay: 0.2s;">Products</a>
+              <a href="#" data-offset="100" class="btn btn-warning wow fadeInRight waves-effect waves-light" data-wow-delay="0.2s" style="visibility: visible; animation-name: fadeInRight; animation-delay: 0.2s;">Services</a>
             </div>
           </div>
         </div>
@@ -996,7 +996,6 @@
 
             <ul class="footer-search list-unstyled">
               <li>
-                <form>
                   <div class="md-form">
                     {% for hidden in form.hidden_fields %}
                       {{ hidden }}
@@ -1013,16 +1012,11 @@
                     {% endfor %}
                     
                   </div>
-                </form>                
               </li>
             </ul>
             
 
-            <!--Info-->
-            <p>
-              <i class="fas fa-home pr-1"></i> Muthaiga, Nairobi-Kenya</p>
-            <p>
-              <i class="fas fa-envelope pr-1"></i> info@schoolnet.co.ke</p>
+            
 
           </div>
           <!--Second column-->
@@ -1032,35 +1026,11 @@
           <!--Third column-->
           <div class="col-xl-3 ml-lg-auto col-lg-4 col-md-6 mt-1 mb-1">
             <!--Contact-->
-            <h5 class="text-uppercase mb-3 font-weight-bold">Recent news</h5>
-
-            <ul class="footer-posts list-unstyled">
-              <li>
-                <a>Ut enim ad minim veniam nostrud.</a>
-                <span>
-                  <p class="grey-text">28 july 2016</p>
-                </span>
-              </li>
-              <li>
-                <a>Duis aute dolor in reprehenderit.</a>
-                <span>
-                  <p class="grey-text">27 july 2016</p>
-                </span>
-              </li>
-              <li>
-                <a>Excepteur sint occaecat cupidatat.</a>
-                <span>
-                  <p class="grey-text">26 july 2016</p>
-                </span>
-              </li>
-              <li>
-                <a>Sed perspiciatis unde omnis iste.</a>
-                <span>
-                  <p class="grey-text">25 july 2016</p>
-                </span>
-              </li>
-            </ul>
-
+            <!--Info-->
+            <p>
+              <i class="fas fa-home pr-1"></i> Muthaiga, Nairobi-Kenya</p>
+            <p>
+              <i class="fas fa-envelope pr-1"></i> info@schoolnet.co.ke</p>
           </div>
           <!--Third column-->
 
@@ -1075,7 +1045,7 @@
     <!--Copyright-->
     <div class="footer-copyright py-3 text-center">
       <div class="container-fluid">
-        © 2019 Copyright: <a href="https://schoolnet.co.ke" target="_blank"> SchoolNet </a>
+        © 2022 Copyright: <a href="https://schoolnet.co.ke" target="_blank"> SchoolNet </a>
       </div>
     </div>
     <!--Copyright-->
@@ -1084,6 +1054,9 @@
   <!--Footer-->
 
   <!--SCRIPTS-->
+
+  <!--FontAwesome-->
+  <script src={% static 'fontawesome_free/js/all.min.js' %}></script>
 
   <!--JQuery-->
   <script type="text/javascript" src={% static 'schoolanding/js/jquery-3.4.0.min.js.download' %}"></script>
@@ -1095,7 +1068,36 @@
   <script type="text/javascript" src={% static 'schoolanding/js/bootstrap.min.js.download' %}></script>
 
   <!--MDB core JavaScript-->
-  <script type="text/javascript" src={% static 'schoolanding/js/mdb.min.js.download' %}></script><div class="hiddendiv common"></div>
+  <script type="text/javascript" src={% static 'schoolanding/js/mdb.min.js.download' %}></script><div class="hiddendiv common">
+
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+</script>
 
   <script>
     //Animation init
