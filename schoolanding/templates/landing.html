@@ -996,6 +996,7 @@
 
             <ul class="footer-search list-unstyled">
               <li>
+                <form id="contact-form">
                   <div class="md-form">
                     {% for hidden in form.hidden_fields %}
                       {{ hidden }}
@@ -1010,6 +1011,23 @@
                       {% endfor %}
                       </div>
                     {% endfor %}
+                    <input id="submit" name="submit" type="submit" value="Submit" class="btn btn-info waves-effect waves-light"/>
+                 
+                        
+                    </form>
+                    <script type="text/javascript">
+                      var data;
+
+                      data = [$('#contact-form').serialize()];
+
+                      $.ajax({
+                        type: "POST",
+                        url: "contact/api/",
+                        dataType: "json",
+                      });
+
+                      console.log(data)
+                    </script>
                     
                   </div>
               </li>
