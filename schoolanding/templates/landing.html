@@ -12,10 +12,13 @@
   <title>SchoolNet</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href={% static 'schoolanding/css/all.css' %}>
+  </link>
   <!-- Bootstrap core CSS -->
   <link href={% static 'schoolanding/css/bootstrap.min.css' %} rel="stylesheet">
+  </link>
   <!-- Material Design Bootstrap -->
   <link href={% static 'schoolanding/css/mdb.min.css' %} rel="stylesheet">
+  </link>
   <style>
     html,
     body,
@@ -60,6 +63,83 @@
       clip: rect(0, 1423px, 724px, 0);
     }
   </style>
+
+  <script>
+    var EPPZScrollTo =
+    {
+      /**
+       * Helpers.
+       */
+      documentVerticalScrollPosition: function () {
+        if (self.pageYOffset) return self.pageYOffset; // Firefox, Chrome, Opera, Safari.
+        if (document.documentElement && document.documentElement.scrollTop) return document.documentElement.scrollTop; // Internet Explorer 6 (standards mode).
+        if (document.body.scrollTop) return document.body.scrollTop; // Internet Explorer 6, 7 and 8.
+        return 0; // None of the above.
+      },
+
+      viewportHeight: function () { return (document.compatMode === "CSS1Compat") ? document.documentElement.clientHeight : document.body.clientHeight; },
+
+      documentHeight: function () { return (document.height !== undefined) ? document.height : document.body.offsetHeight; },
+
+      documentMaximumScrollPosition: function () { return this.documentHeight() - this.viewportHeight(); },
+
+      elementVerticalClientPositionById: function (id) {
+        var element = document.getElementById(id);
+        var rectangle = element.getBoundingClientRect();
+        return rectangle.top;
+      },
+
+      /**
+       * Animation tick.
+       */
+      scrollVerticalTickToPosition: function (currentPosition, targetPosition) {
+        var filter = 0.2;
+        var fps = 60;
+        var difference = parseFloat(targetPosition) - parseFloat(currentPosition);
+
+        // Snap, then stop if arrived.
+        var arrived = (Math.abs(difference) <= 0.5);
+        if (arrived) {
+          // Apply target.
+          scrollTo(0.0, targetPosition);
+          return;
+        }
+
+        // Filtered position.
+        currentPosition = (parseFloat(currentPosition) * (1.0 - filter)) + (parseFloat(targetPosition) * filter);
+
+        // Apply target.
+        scrollTo(0.0, Math.round(currentPosition));
+
+        // Schedule next tick.
+        setTimeout("EPPZScrollTo.scrollVerticalTickToPosition(" + currentPosition + ", " + targetPosition + ")", (1000 / fps));
+      },
+
+      /**
+       * For public use.
+       *
+       * @param id The id of the element to scroll to.
+       * @param padding Top padding to apply above element.
+       */
+      scrollVerticalToElementById: function (id, padding) {
+        var element = document.getElementById(id);
+        if (element == null) {
+          console.warn('Cannot find element with id \'' + id + '\'.');
+          return;
+        }
+
+        var targetPosition = this.documentVerticalScrollPosition() + this.elementVerticalClientPositionById(id) - padding;
+        var currentPosition = this.documentVerticalScrollPosition();
+
+        // Clamp.
+        var maximumScrollPosition = this.documentMaximumScrollPosition();
+        if (targetPosition > maximumScrollPosition) targetPosition = maximumScrollPosition;
+
+        // Start animation.
+        this.scrollVerticalTickToPosition(currentPosition, targetPosition);
+      }
+    };
+  </script>
 </head>
 
 <body class="university-lp">
@@ -86,10 +166,14 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect waves-light" href="#contact" data-offset="100">Info</a>
+              <a class="nav-link waves-effect waves-light" href="#about" data-offset="100">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#modal-contact">Contact</a>
+              <a class="nav-link waves-effect waves-light" href="#services" data-offset="100">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#contact-form">Contact
+                Us</a>
             </li>
           </ul>
 
@@ -110,6 +194,11 @@
                 <i class="fab fa-instagram"></i>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link waves-effect waves-light">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -118,8 +207,8 @@
 
     <!-- Intro Section -->
     <div id="home" class="view jarallax" data-jarallax="{&quot;speed&quot;: 0.2}"
-      style="background-image: none; background-repeat: no-repeat; background-size: cover; background-position: center center; z-index: 0;"
-      data-jarallax-original-styles="background-image: url(&#39;https://mdbootstrap.com/img/Photos/Others/images/67.jpg&#39;); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      style="background-image: url('{% static 'schoolanding/img/bg.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center center; z-index: 0; height:100vh;"
+      data-jarallax-original-styles="background-image: url('{% static 'schoolanding/img/bg.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
       <div class="mask rgba-black-strong">
         <div class="container h-100 d-flex justify-content-center align-items-center">
           <div class="row smooth-scroll">
@@ -130,11 +219,12 @@
                 <hr class="hr-light">
                 <h3 class="subtext-header mt-4 mb-5">Reshaping Education through Technology</h3>
               </div>
-              <a href="#" data-offset="100" class="btn btn-info wow fadeInLeft waves-effect waves-light"
+              <a href="#about" data-offset="100" class="btn btn-info wow fadeInLeft waves-effect waves-light" data-wow-delay="0.2s"
+                onclick="EPPZScrollTo.scrollVerticalToElementById('about', 20);"
+                style="visibility: visible; animation-name: fadeInLeft; animation-delay: 0.2s;">About Us</a>
+              <a href="#services" data-offset="100" class="btn btn-warning wow fadeInRight waves-effect waves-light"
                 data-wow-delay="0.2s"
-                style="visibility: visible; animation-name: fadeInLeft; animation-delay: 0.2s;">Products</a>
-              <a href="#" data-offset="100" class="btn btn-warning wow fadeInRight waves-effect waves-light"
-                data-wow-delay="0.2s"
+                onclick="EPPZScrollTo.scrollVerticalToElementById('about', 20);"
                 style="visibility: visible; animation-name: fadeInRight; animation-delay: 0.2s;">Services</a>
             </div>
           </div>
@@ -171,9 +261,10 @@
           <div class="col-lg-5 col-md-12 mb-5 pb-4 wow fadeIn" data-wow-delay="0.4s"
             style="visibility: visible; animation-name: fadeIn; animation-delay: 0.4s;">
 
-            <!--Image-->
-            <img src="./Material Design Bootstrap_files/img (9).jpg" class="img-fluid z-depth-1 rounded" alt="My photo">
+            <iframe width="420" height="315" src="https://www.youtube.com/embed/I1EOci9oy-g?autoplay=1&mute=1">
 
+            </iframe>
+            <h6>SchoolNet CEO describes how the attendance management system works for schools</h6>
           </div>
           <!--First column-->
 
@@ -223,7 +314,7 @@
       <hr>
 
       <!--Projects section v.3-->
-      <section id="info" class="mt-4 mb-5 pb-4">
+      <section id="partners" class="mt-4 mb-5 pb-4">
 
         <!--Section heading-->
         <h2 class="text-center mb-5 font-weight-bold pt-5 pb-4 my-5 wow fadeIn" data-wow-delay="0.2s"
@@ -251,22 +342,22 @@
               <ul class="nav md-pills pills-primary d-flex justify-content-center" role="tablist">
 
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="https://damacrest.schoolnet.co.ke" role="tab">
+                  <a class="nav-link" href="https://damacrest.schoolnet.co.ke">
                     <i class="fas fa-graduation-cap fa-2x"></i>
                     <br> Damacrest Schools</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#" role="tab">
+                  <a class="nav-link" href="#">
                     <i class="fas fa-graduation-cap fa-2x"></i>
                     <br> TenderCare Schools</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="https://gathambigirls.schoolnet.co.ke" role="tab">
+                  <a class="nav-link" href="https://gathambigirls.schoolnet.co.ke">
                     <i class="fas fa-graduation-cap fa-2x"></i>
                     <br> Gathambi Girls Sec. School</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="https://sunrise.schoolnet.co.ke" role="tab">
+                  <a class="nav-link" href="https://sunrise.schoolnet.co.ke">
                     <i class="fas fa-home fa-2x"></i>
                     <br> Sunrise School</a>
                 </li>
@@ -288,14 +379,15 @@
                   <div class="col-lg-5 col-md-12">
 
                     <!--Featured image-->
-                    <div class="view overlay z-depth-1 mb-2">
-                      <img src="./Material Design Bootstrap_files/54.jpg" class="rounded img-fluid" alt="sample image">
+                    <div class="view overlay z-depth-1 mb-2" style="outline-style:hidden;">
+                      <img src="{% static 'schoolanding/img/biomet.png' %}" class="rounded img-fluid"
+                        alt="sample image">
                     </div>
                   </div>
                   <!--First column-->
 
                   <!--Second column-->
-                  <div class="col-lg-6 ml-lg-auto col-md-12 text-center text-md-left">
+                  <div class="col-lg-6 ml-lg-auto col-md-12 text-center text-md-left" id="services">
 
                     <!--Title-->
                     <h4 class="mb-5">Other Services</h4>
@@ -325,7 +417,6 @@
         <!--First row-->
 
       </section>
-      <!--Projects section v.3-->
 
     </div>
 
@@ -536,10 +627,10 @@
   <script src={% static 'fontawesome_free/js/all.min.js' %}></script>
 
   <!--JQuery-->
-  <script type="text/javascript" src={% static 'schoolanding/js/jquery-3.4.0.min.js.download' %}"></script>
+  <script type="text/javascript" src={% static 'schoolanding/js/jquery-3.4.0.min.js.download' %}></script>
 
   <!--Bootstrap tooltips-->
-  <script type="text/javascript" src={% static 'schoolanding/js/popper.min.js.download' %}"></script>
+  <script type="text/javascript" src={% static 'schoolanding/js/popper.min.js.download' %}></script>
 
   <!--Bootstrap core JavaScript-->
   <script type="text/javascript" src={% static 'schoolanding/js/bootstrap.min.js.download' %}></script>
@@ -592,7 +683,6 @@
     });
 
   </script>
-
 
 
 
