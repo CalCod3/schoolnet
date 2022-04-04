@@ -172,13 +172,18 @@
               <a class="nav-link waves-effect waves-light" href="#services" data-offset="100">Services</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#contact-modal">Contact
+              <a id="contacts" class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#contact-modal">Contact
                 Us</a>
             </li>
           </ul>
-          <div class="modal fade" id="contact-modal" tabindex="-1" aria-labelledby="contact-modalLabel"
+          <div class="modal bs-modal" id="contact-modal" tabindex="-1" aria-labelledby="contact-modalLabel"
           aria-hidden="true">
-          <div class="modal-dialog" role="document">
+              <style type="text/css">
+                  .modal-backdrop {
+                    z-index: -1;
+                  }
+              </style>
+          <div class="modal-dialog" role="dialog">
             <div class="modal-content">
               <div class="modal-header text-center">
                 <h4 class="modal-title w-100 font-weight-bold" id="contact-modalLabel">Write to us</h4>
@@ -187,8 +192,9 @@
                 </button>
               </div>
               <div class="modal-body mx-3">
-                <form id="contact-form">
-                  <div class="md-form">
+                <div class="modal-details form-outline mb-4">
+                  <form id="contact-form " action="contact/api" method="POST">
+                  
                     {% for hidden in form.hidden_fields %}
                     {{ hidden }}
                     {% endfor %}
@@ -202,24 +208,30 @@
                       {% endfor %}
                     </div>
                     {% endfor %}
-                    <input id="submit" name="submit" type="submit" value="Submit"
-                      class="btn btn-info waves-effect waves-light" />
+                    
         
         
                 </form>
+                </div>
         
               </div>
               <div class="modal-footer d-flex justify-content-center">
+                <input id="submit" name="submit" type="submit" value="Submit"
+                      class="btn btn-info waves-effect waves-light" />
                 <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                <button class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
               </div>
             </div>
           </div>
         </div>
         
-        <div class="text-center">
-          <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#contact-modal">Launch Contact Form</a>
-        </div>
+        <script>
+        $(document).ready(function(){
+          $("#contacts").click(function(){
+            $("#contact-modal").modal("show", {backdrop: true});
+  });
+});
+</script>
+        
 
           <!--Social Icons-->
           <ul class="navbar-nav nav-flex-icons">
@@ -251,8 +263,7 @@
 
     <!-- Intro Section -->
     <div id="home" class="view jarallax" data-jarallax="{&quot;speed&quot;: 0.2}"
-      style="background-image: url('{% static 'schoolanding/img/bg1.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center center; z-index: 0; height:100vh;"
-      data-jarallax-original-styles="background-image: url('{% static 'schoolanding/img/bg1.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      style="background-image: url('{% static 'schoolanding/img/bg1.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center; z-index: 0; height:100vh;">
       <div class="mask rgba-black-strong">
         <div class="container h-100 d-flex justify-content-center align-items-center">
           <div class="row smooth-scroll">
@@ -526,8 +537,9 @@
             Get your own personalised service, and allow us to transform your management experience.
           </p>
           <!--Reservation button-->
-          <a href="#contact-modal" class="btn btn-info waves-effect waves-light">Contact</a>
-
+          <div class="text-center">
+            <a href="" class="btn btn-default btn-rounded waves-effect waves-light mb-4" data-toggle="modal" data-target="#contact-modal">Contact Us</a>
+          </div>
         </div>
         <!--First column-->
 
@@ -586,8 +598,9 @@
 
             <ul class="list-unstyled">
               <li>
-                <form id="contact-form">
-                  <div class="md-form">
+                <div class="form-outline mb-4">
+                  <form id="contact-form">
+              
                     {% for hidden in form.hidden_fields %}
                     {{ hidden }}
                     {% endfor %}
@@ -606,6 +619,7 @@
 
 
                 </form>
+                </div>
                 <script type="text/javascript">
                   var data;
 
@@ -714,21 +728,7 @@
     });
   </script>
 
-  <script>
-    //Animation init
-    new WOW().init();
-
-    //Modal
-    $('#contact-modal').on('shown.bs.modal', function () {
-      $('#myInput').focus()
-    })
-
-    // Material Select Initialization
-    $(document).ready(function () {
-      $('.mdb-select').material_select();
-    });
-
-  </script>
+  
 
 
 
