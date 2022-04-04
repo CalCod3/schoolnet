@@ -150,7 +150,7 @@
     <!--Navbar-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
       <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="https://www.schoolnet.co.ke">
           <strong>SchoolNet</strong>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -172,10 +172,54 @@
               <a class="nav-link waves-effect waves-light" href="#services" data-offset="100">Services</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#contact-form">Contact
+              <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#contact-modal">Contact
                 Us</a>
             </li>
           </ul>
+          <div class="modal fade" id="contact-modal" tabindex="-1" aria-labelledby="contact-modalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold" id="contact-modalLabel">Write to us</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+                <form id="contact-form">
+                  <div class="md-form">
+                    {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                    {% endfor %}
+        
+                    {% for field in form.visible_fields %}
+                    <div class="input-group flex-nowrap">
+                      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                      {{ field }}
+                      {% for error in field.errors %}
+                      <span class="help-block">{{ error }}</span>
+                      {% endfor %}
+                    </div>
+                    {% endfor %}
+                    <input id="submit" name="submit" type="submit" value="Submit"
+                      class="btn btn-info waves-effect waves-light" />
+        
+        
+                </form>
+        
+              </div>
+              <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                <button class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center">
+          <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#contact-modal">Launch Contact Form</a>
+        </div>
 
           <!--Social Icons-->
           <ul class="navbar-nav nav-flex-icons">
@@ -207,8 +251,8 @@
 
     <!-- Intro Section -->
     <div id="home" class="view jarallax" data-jarallax="{&quot;speed&quot;: 0.2}"
-      style="background-image: url('{% static 'schoolanding/img/bg.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center center; z-index: 0; height:100vh;"
-      data-jarallax-original-styles="background-image: url('{% static 'schoolanding/img/bg.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      style="background-image: url('{% static 'schoolanding/img/bg1.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center center; z-index: 0; height:100vh;"
+      data-jarallax-original-styles="background-image: url('{% static 'schoolanding/img/bg1.jpg' %}'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
       <div class="mask rgba-black-strong">
         <div class="container h-100 d-flex justify-content-center align-items-center">
           <div class="row smooth-scroll">
@@ -482,7 +526,7 @@
             Get your own personalised service, and allow us to transform your management experience.
           </p>
           <!--Reservation button-->
-          <a href="#" class="btn btn-info waves-effect waves-light">Contact</a>
+          <a href="#contact-modal" class="btn btn-info waves-effect waves-light">Contact</a>
 
         </div>
         <!--First column-->
@@ -540,7 +584,7 @@
             <!--Search-->
             <h5 class="text-uppercase mb-3 font-weight-bold">Reach out to us</h5>
 
-            <ul class="footer-search list-unstyled">
+            <ul class="list-unstyled">
               <li>
                 <form id="contact-form">
                   <div class="md-form">
@@ -576,8 +620,8 @@
                   console.log(data)
                 </script>
 
-          </div>
-          </li>
+              
+              </li>
           </ul>
 
 
@@ -619,6 +663,8 @@
     <!--Copyright-->
 
   </footer>
+
+
   <!--Footer-->
 
   <!--SCRIPTS-->
@@ -673,7 +719,7 @@
     new WOW().init();
 
     //Modal
-    $('#myModal').on('shown.bs.modal', function () {
+    $('#contact-modal').on('shown.bs.modal', function () {
       $('#myInput').focus()
     })
 
