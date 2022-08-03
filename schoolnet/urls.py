@@ -22,5 +22,5 @@ from schoolanding.views import landing_view, contactAPI
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', landing_view),
-    path('contact/api/', contactAPI)
+    path('contact/api/', contactAPI, name='contact-api')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

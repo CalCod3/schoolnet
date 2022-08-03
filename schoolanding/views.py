@@ -17,8 +17,9 @@ def landing_view(request, *args, **kwargs):
 @api_view(['POST'])
 def contactAPI(request):
     serializer = ContactSerializer(data=request.data)
+    is_ajax = request.META.get("CONTENT_TYPE") == "application/json"
 
-    if serializer.is_valid():
+    if serializer.is_valid() and request.is_ajax():
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     else:

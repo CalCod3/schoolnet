@@ -20,15 +20,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^ee@0ik_b5+(j7lq%+c=m7+15^&cl_dzhp1gn=-ayw1n)f&%g*'
+SECRET_KEY = 'django-insecure__aod#aa0jsml(*c08a7xu_))l$es=y*_5+v*-v(hfuq$2fp(iev'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'schoolnet.co.ke',
+    'www.schoolnet.co.ke',
+    'start.schoolnet.co.ke',
+    'www.start.schoolnet.co.ke',
+    ]
 
 
 # Application definition
+
+import sys
+
+sys.modules['fontawesome_free'] = __import__('fontawesome-free')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -129,4 +138,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+import os
+
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'pld107.truehost.cloud'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'caleb@schoolnet.co.ke'
+EMAIL_HOST_PASSWORD = 'jXW6wPp1&dZ}'
